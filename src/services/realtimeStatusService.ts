@@ -136,6 +136,39 @@ export class RealtimeStatusService {
   ): () => void {
     debugLog('RealtimeStatusService: Subscribing to therapist status changes');
     
+    // Load initial data first
+    const loadInitialData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('therapists')
+          .select('*')
+          .order('name');
+
+        if (error) {
+          console.error('Failed to fetch initial therapists data:', error);
+          return;
+        }
+
+        const therapists: Therapist[] = data.map(row => ({
+          id: row.id,
+          name: row.name,
+          status: row.status,
+          totalEarnings: row.total_earnings,
+          totalSessions: row.total_sessions,
+          checkInTime: row.check_in_time,
+          departureTime: row.departure_time,
+          expenses: [] // Will be loaded separately
+        }));
+
+        callback(therapists);
+      } catch (error) {
+        console.error('Error loading initial therapists data:', error);
+      }
+    };
+
+    // Load initial data
+    loadInitialData();
+    
     const channel = supabase
       .channel('therapist-status-realtime')
       .on(
@@ -184,6 +217,35 @@ export class RealtimeStatusService {
   ): () => void {
     debugLog('RealtimeStatusService: Subscribing to room status changes');
     
+    // Load initial data first
+    const loadInitialData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('rooms')
+          .select('*')
+          .order('name');
+
+        if (error) {
+          console.error('Failed to fetch initial rooms data:', error);
+          return;
+        }
+
+        const rooms: Room[] = data.map(row => ({
+          id: row.id,
+          name: row.name,
+          type: row.type,
+          status: row.status
+        }));
+
+        callback(rooms);
+      } catch (error) {
+        console.error('Error loading initial rooms data:', error);
+      }
+    };
+
+    // Load initial data
+    loadInitialData();
+    
     const channel = supabase
       .channel('room-status-realtime')
       .on(
@@ -227,6 +289,61 @@ export class RealtimeStatusService {
     callback: (sessions: Session[]) => void
   ): () => void {
     debugLog('RealtimeStatusService: Subscribing to session status changes');
+    
+    // Load initial data first
+    const loadInitialData = async () => {
+      try {
+        const { data, error } = await supabase
+          .from('sessions')
+          .select(`
+            *,
+            services (*)
+          `)
+          .order('start_time', { ascending: false });
+
+        if (error) {
+          console.error('Failed to fetch initial sessions data:', error);
+          return;
+        }
+
+        const sessions: Session[] = data.map(row => {
+          const service = {
+            id: row.services.id,
+            category: row.services.category,
+            roomType: row.services.room_type,
+            duration: row.services.duration,
+            price: row.services.price,
+            ladyPayout: row.services.lady_payout,
+            shopRevenue: row.services.shop_revenue,
+            description: row.services.description,
+          };
+
+          return {
+            id: row.id,
+            therapistIds: row.therapist_ids,
+            roomId: row.room_id,
+            service,
+            startTime: row.start_time,
+            endTime: row.end_time,
+            actualEndTime: row.actual_end_time,
+            status: row.status,
+            totalPrice: row.total_price,
+            discount: row.discount,
+            actualDuration: row.actual_duration,
+            sessionStartTime: row.session_start_time,
+            prepStartTime: row.prep_start_time,
+            isInPrepPhase: row.is_in_prep_phase
+          };
+        });
+
+        callback(sessions);
+      } catch (error) {
+        console.error('Error loading initial sessions data:', error);
+      }
+    };
+
+    // Load initial data
+    loadInitialData();
     
     const channel = supabase
       .channel('session-status-realtime')

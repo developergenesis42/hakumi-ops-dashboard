@@ -56,18 +56,18 @@ function SidePanel() {
 
   // Memoized room filtering
   const roomCategories = React.useMemo(() => ({
-    shower: state.rooms.filter(r => r.type === 'Shower'),
-    vipJacuzzi: state.rooms.filter(r => r.type === 'VIP Jacuzzi'),
-    doubleBedShower: state.rooms.filter(r => r.type === 'Double Bed Shower (large)'),
-    singleBedShower: state.rooms.filter(r => r.type === 'Single Bed Shower (large)')
+    shower: (state.rooms || []).filter(r => r.type === 'Shower'),
+    vipJacuzzi: (state.rooms || []).filter(r => r.type === 'VIP Jacuzzi'),
+    doubleBedShower: (state.rooms || []).filter(r => r.type === 'Double Bed Shower (large)'),
+    singleBedShower: (state.rooms || []).filter(r => r.type === 'Single Bed Shower (large)')
   }), [state.rooms]);
 
   // Memoized roster statistics
   const rosterStats = React.useMemo(() => ({
-    total: state.todayRoster.length,
-    checkedIn: state.todayRoster.filter(t => t.status === 'available' || t.status === 'in-session').length,
-    inSession: state.todayRoster.filter(t => t.status === 'in-session').length,
-    available: state.todayRoster.filter(t => t.status === 'available').length
+    total: (state.todayRoster || []).length,
+    checkedIn: (state.todayRoster || []).filter(t => t.status === 'available' || t.status === 'in-session').length,
+    inSession: (state.todayRoster || []).filter(t => t.status === 'in-session').length,
+    available: (state.todayRoster || []).filter(t => t.status === 'available').length
   }), [state.todayRoster]);
 
   return (
