@@ -17,6 +17,9 @@ export interface Therapist {
   checkInTime?: string | Date;
   departureTime?: string | Date;
   currentSession?: string | Session; // session ID or Session object
+  // Today's stats (calculated from sessions)
+  todaySessions?: number;
+  todayEarnings?: number;
 }
 
 export interface Service {

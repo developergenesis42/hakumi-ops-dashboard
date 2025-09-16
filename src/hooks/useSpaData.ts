@@ -1,6 +1,6 @@
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react';
 import supabase from '@/utils/supabase';
-import type { Therapist, Room, Service } from '@/types';
+import type { Therapist, Room, Service, Session } from '@/types';
 import { useLoadingState } from '@/hooks/useLoadingState';
 import { debugLog } from '@/config/environment';
 
@@ -8,6 +8,7 @@ export function useSpaData() {
   const [therapists, setTherapists] = useState<Therapist[]>([]);
   const [rooms, setRooms] = useState<Room[]>([]);
   const [services, setServices] = useState<Service[]>([]);
+  const [sessions, setSessions] = useState<Session[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [isFetching, setIsFetching] = useState(false);
   const { loading, setLoading } = useLoadingState(true, 2000);
@@ -124,6 +125,61 @@ export function useSpaData() {
     }
   };
 
+  // Fetch sessions
+  const fetchSessions = async () => {
+    try {
+      debugLog('useSpaData: Fetching sessions...');
+      const { data, error } = await supabase
+        .from('sessions')
+        .select(`
+          *,
+          services (*)
+        `)
+        .order('start_time', { ascending: false });
+
+      if (error) {
+        console.error('useSpaData: Sessions fetch error:', error);
+        throw error;
+      }
+      
+      debugLog('useSpaData: Sessions data received:', data?.length || 0, 'items');
+      
+      // Convert database format to app format
+      const formattedSessions: Session[] = data.map(row => {
+        const service = {
+          id: row.services.id,
+          category: row.services.category,
+          roomType: row.services.room_type,
+          duration: row.services.duration,
+          price: row.services.price,
+          ladyPayout: row.services.lady_payout,
+          shopRevenue: row.services.shop_revenue,
+          description: row.services.description,
+        };
+
+        return {
+          id: row.id,
+          therapistIds: row.therapist_ids,
+          roomId: row.room_id,
+          service,
+          startTime: row.start_time,
+          endTime: row.end_time,
+          actualEndTime: row.actual_end_time,
+          status: row.status,
+          totalPrice: row.total_price,
+          discount: row.discount,
+          actualDuration: row.actual_duration,
+        };
+      });
+      
+      setSessions(formattedSessions);
+      debugLog('useSpaData: Sessions set successfully');
+    } catch (err) {
+      console.error('useSpaData: Error fetching sessions:', err);
+      setError(err instanceof Error ? err.message : 'Failed to fetch sessions');
+    }
+  };
+
   // Fetch all data
   const fetchAllData = useCallback(async () => {
     // Prevent multiple simultaneous fetches
@@ -154,7 +210,8 @@ export function useSpaData() {
         Promise.all([
           fetchTherapists(),
           fetchRooms(),
-          fetchServices()
+          fetchServices(),
+          fetchSessions()
         ]),
         timeoutPromise
       ]);
@@ -171,6 +228,7 @@ export function useSpaData() {
         setTherapists([]);
         setRooms([]);
         setServices([]);
+        setSessions([]);
       }
     } finally {
       debugLog('useSpaData: Setting loading to false');
@@ -181,11 +239,11 @@ export function useSpaData() {
 
   useEffect(() => {
     // Only fetch if we haven't fetched yet and we're not currently fetching
-    if (!isFetching && !hasAttemptedFetch.current && therapists.length === 0 && rooms.length === 0 && services.length === 0) {
+    if (!isFetching && !hasAttemptedFetch.current && therapists.length === 0 && rooms.length === 0 && services.length === 0 && sessions.length === 0) {
       debugLog('useSpaData: Triggering fetchAllData');
       fetchAllData();
     }
-  }, [isFetching, therapists.length, rooms.length, services.length, fetchAllData]);
+  }, [isFetching, therapists.length, rooms.length, services.length, sessions.length, fetchAllData]);
 
   // Set up real-time subscriptions
   useEffect(() => {
@@ -229,12 +287,25 @@ export function useSpaData() {
       )
       .subscribe();
 
+    // Subscribe to sessions changes
+    const sessionsChannel = supabase
+      .channel('sessions-realtime')
+      .on('postgres_changes', 
+        { event: '*', schema: 'public', table: 'sessions' },
+        async () => {
+          debugLog('useSpaData: Sessions table changed, refetching...');
+          await fetchSessions();
+        }
+      )
+      .subscribe();
+
     // Cleanup subscriptions on unmount
     return () => {
       debugLog('useSpaData: Cleaning up real-time subscriptions');
       supabase.removeChannel(therapistsChannel);
       supabase.removeChannel(roomsChannel);
       supabase.removeChannel(servicesChannel);
+      supabase.removeChannel(sessionsChannel);
     };
   }, [loading]);
 
@@ -242,8 +313,9 @@ export function useSpaData() {
     therapists,
     rooms,
     services,
+    sessions,
     loading,
     error,
     refetch: fetchAllData,
-  }), [therapists, rooms, services, loading, error, fetchAllData]);
+  }), [therapists, rooms, services, sessions, loading, error, fetchAllData]);
 }

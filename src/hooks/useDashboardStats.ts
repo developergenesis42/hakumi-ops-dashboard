@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useApp } from '@/hooks/useApp';
+import { useSupabaseData } from '@/hooks/useSupabaseData';
 
 export interface DashboardStats {
   totalSlips: number;
@@ -13,9 +14,12 @@ export interface DashboardStats {
 
 export function useDashboardStats(): DashboardStats {
   const { state } = useApp();
+  const { sessions: supabaseSessions } = useSupabaseData();
 
   return useMemo(() => {
-    const allSessions = state.sessions; // All sessions (active + completed)
+    // Use sessions from Supabase (which includes all completed sessions from all devices)
+    // Fallback to local state if Supabase sessions are not loaded yet
+    const allSessions = supabaseSessions.length > 0 ? supabaseSessions : state.sessions;
     
     // Calculate total expenses across all therapists
     const totalExpenses = state.todayRoster.reduce((sum, therapist) => {
@@ -35,5 +39,5 @@ export function useDashboardStats(): DashboardStats {
       totalExpenses, // Total expenses across all therapists
       walkOutCount: state.walkOuts.reduce((sum, walkOut) => sum + (walkOut.count || 1), 0)
     };
-  }, [state.sessions, state.todayRoster, state.walkOuts]);
+  }, [supabaseSessions, state.sessions, state.todayRoster, state.walkOuts]);
 }

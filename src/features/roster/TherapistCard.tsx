@@ -3,6 +3,7 @@ import type { Therapist } from '@/types';
 import { SessionModal, DepartureModal, RemoveStaffModal, ExpenseModal } from '@/shared/components/modals';
 import { useTherapistSessionManagement } from '@/hooks/useTherapistSessionManagement';
 import { useApp } from '@/hooks/useApp';
+import { useTherapistStats } from '@/hooks/useTherapistStats';
 import TimerDisplay from '@/features/staff/TimerDisplay';
 import RemoveButton from '@/features/staff/RemoveButton';
 import { TherapistActions } from '@/features/staff/TherapistActions';
@@ -30,6 +31,10 @@ function TherapistCardComponent({ therapist, className = '', 'aria-label': ariaL
   
   // Get rooms data from app context
   const { state } = useApp();
+  
+  // Get enhanced therapist stats with today's completed sessions
+  const { enhancedTherapists } = useTherapistStats();
+  const enhancedTherapist = enhancedTherapists.find(t => t.id === therapist.id) || therapist;
   
   const {
     isSessionModalOpen,
@@ -97,7 +102,7 @@ function TherapistCardComponent({ therapist, className = '', 'aria-label': ariaL
           <TimerDisplay 
             therapist={therapist} 
             rooms={state.rooms} 
-            completedSessions={therapist.totalSessions}
+            completedSessions={enhancedTherapist.todaySessions || 0}
           />
         </FeatureErrorBoundary>
 
