@@ -1,11 +1,11 @@
 import { useCallback } from 'react';
 import { useApp } from '@/hooks/useApp';
-import { sessionService } from '@/services/sessionService';
-import { roomService } from '@/services/roomService';
+import { useRealtimeStatus } from '@/hooks/useRealtimeStatus';
 import { debugLog } from '@/config/environment';
 
 export function useManualTimerStart() {
   const { dispatch, state } = useApp();
+  const { updateSessionStatus, updateRoomStatus, updateTherapistStatus } = useRealtimeStatus();
 
   const startSessionTimer = useCallback(async (sessionId: string) => {
     try {
@@ -17,26 +17,30 @@ export function useManualTimerStart() {
         throw new Error('Session not found');
       }
       
+      const now = new Date();
+      
       // Update local state immediately for responsive UI
       dispatch({ 
         type: 'START_SESSION_TIMER', 
         payload: sessionId 
       });
 
-      // Receipt is already printed when session was created
-      debugLog('✅ Session timer started for session:', sessionId);
-
-      // Update database asynchronously
+      // Update real-time status in database (single source of truth)
       try {
-        await sessionService.updateSessionPartial(sessionId, {
-          sessionStartTime: new Date(),
-          isInPrepPhase: false
-        });
+        // Update session status
+        await updateSessionStatus(sessionId, 'in_progress', now, false);
         
-        // Mark room as occupied in database
-        await roomService.markRoomOccupied(session.roomId, sessionId);
+        // Update room status
+        if (session.roomId) {
+          await updateRoomStatus(session.roomId, 'occupied', sessionId);
+        }
         
-        debugLog('✅ Session timer started in database and room marked as occupied');
+        // Update therapist status
+        for (const therapistId of session.therapistIds) {
+          await updateTherapistStatus(therapistId, 'in-session', sessionId);
+        }
+        
+        debugLog('✅ Session timer started and status updated in database');
       } catch (error) {
         console.warn('Failed to update session timer in database:', error);
         // Local state was already updated, so UI is still correct
@@ -45,7 +49,7 @@ export function useManualTimerStart() {
       console.error('Failed to start session timer:', error);
       throw error;
     }
-  }, [dispatch, state]);
+  }, [dispatch, state, updateSessionStatus, updateRoomStatus, updateTherapistStatus]);
 
   return { startSessionTimer };
 }

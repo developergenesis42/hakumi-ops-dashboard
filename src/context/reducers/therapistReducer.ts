@@ -51,7 +51,8 @@ export interface TherapistAction {
   type: 'ADD_TO_ROSTER' | 'REMOVE_FROM_ROSTER' | 'CLEAR_ROSTER' | 'CHECK_IN_THERAPIST' | 
         'DEPART_THERAPIST' | 'UPDATE_THERAPIST_STATUS' | 'UPDATE_THERAPIST_STATS' | 
         'ADD_EXPENSE' | 'REMOVE_EXPENSE' | 'LOAD_TODAY_ROSTER' | 'LOAD_SUPABASE_DATA' |
-        'START_SESSION' | 'COMPLETE_SESSION' | 'MANUAL_ADD_SESSION' | 'LOAD_SESSIONS';
+        'START_SESSION' | 'COMPLETE_SESSION' | 'MANUAL_ADD_SESSION' | 'LOAD_SESSIONS' |
+        'LOAD_THERAPISTS';
   payload?: Therapist | 
             string | 
             { therapistId: string; status: Therapist['status']; currentSessionId?: string } |
@@ -425,6 +426,21 @@ export function therapistReducer(state: TherapistState, action: TherapistAction)
       return {
         ...state,
         todayRoster: updatedRoster
+      };
+    }
+
+    case 'LOAD_THERAPISTS': {
+      if (!isTherapistArray(action.payload)) {
+        debugLog('LOAD_THERAPISTS: Invalid payload type');
+        return state;
+      }
+      
+      const loadedTherapists = action.payload;
+      
+      // Update therapists in the master list
+      return {
+        ...state,
+        therapists: loadedTherapists
       };
     }
 

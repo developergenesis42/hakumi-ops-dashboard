@@ -39,7 +39,7 @@ export interface Room {
   name: string;
   status?: string;
   type?: string;
-  currentSession?: string; // session ID
+  currentSession?: string | Session; // session ID or Session object
 }
 
 export interface Session {

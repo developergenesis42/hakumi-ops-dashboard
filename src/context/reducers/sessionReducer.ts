@@ -5,12 +5,13 @@ export interface SessionState {
 }
 
 export interface SessionAction {
-  type: 'START_SESSION' | 'COMPLETE_SESSION' | 'UPDATE_SESSION' | 'MANUAL_ADD_SESSION' | 'LOAD_SESSIONS' | 'START_SESSION_TIMER';
+  type: 'START_SESSION' | 'COMPLETE_SESSION' | 'UPDATE_SESSION' | 'MANUAL_ADD_SESSION' | 'LOAD_SESSIONS' | 'START_SESSION_TIMER' | 'UPDATE_SESSION_STATUS';
   payload?: Session | 
             string | 
             { sessionId: string; actualEndTime?: string; actualDuration?: number } |
             { sessionId: string; updates: Partial<Session> } |
-            Session[];
+            Session[] |
+            { sessionId: string; status: Session['status']; sessionStartTime?: Date; isInPrepPhase?: boolean };
 }
 
 export function sessionReducer(state: SessionState, action: SessionAction): SessionState {
@@ -144,6 +145,29 @@ export function sessionReducer(state: SessionState, action: SessionAction): Sess
       return {
         ...state,
         sessions: mergedSessions
+      };
+    }
+
+    case 'UPDATE_SESSION_STATUS': {
+      const payload = action.payload as { sessionId: string; status: Session['status']; sessionStartTime?: Date; isInPrepPhase?: boolean };
+      if (!payload || !payload.sessionId || !payload.status) {
+        return state;
+      }
+
+      const updatedSessions = state.sessions.map(session => 
+        session.id === payload.sessionId 
+          ? { 
+              ...session, 
+              status: payload.status,
+              sessionStartTime: payload.sessionStartTime || session.sessionStartTime,
+              isInPrepPhase: payload.isInPrepPhase !== undefined ? payload.isInPrepPhase : session.isInPrepPhase
+            }
+          : session
+      );
+
+      return {
+        ...state,
+        sessions: updatedSessions
       };
     }
 

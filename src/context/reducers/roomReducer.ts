@@ -5,13 +5,14 @@ export interface RoomState {
 }
 
 export interface RoomAction {
-  type: 'START_SESSION' | 'START_SESSION_TIMER' | 'COMPLETE_SESSION' | 'LOAD_SESSIONS' | 'LOAD_SUPABASE_DATA' | 'LOAD_ROOMS' | 'RESET_DAY' | 'GLOBAL_RESET';
+  type: 'START_SESSION' | 'START_SESSION_TIMER' | 'COMPLETE_SESSION' | 'LOAD_SESSIONS' | 'LOAD_SUPABASE_DATA' | 'LOAD_ROOMS' | 'RESET_DAY' | 'GLOBAL_RESET' | 'UPDATE_ROOM_STATUS';
   payload?: Session | 
             string | 
             { sessionId: string } | 
             Session[] | 
             { rooms: Room[] } |
-            Room[];
+            Room[] |
+            { roomId: string; status: Room['status']; currentSessionId?: string };
 }
 
 export function roomReducer(state: RoomState, action: RoomAction): RoomState {
@@ -28,11 +29,13 @@ export function roomReducer(state: RoomState, action: RoomAction): RoomState {
 
     case 'COMPLETE_SESSION': {
       const sessionId = typeof action.payload === 'string' ? action.payload : (action.payload as { sessionId: string }).sessionId;
-      const completedSession = state.rooms.find(r => r.currentSession?.id === sessionId);
+      const completedSession = state.rooms.find(r => 
+        typeof r.currentSession === 'object' && r.currentSession?.id === sessionId
+      );
       if (!completedSession) return state;
 
       const roomsAfterSession = state.rooms.map(r => {
-        if (r.currentSession?.id === sessionId) {
+        if (typeof r.currentSession === 'object' && r.currentSession?.id === sessionId) {
           return { ...r, status: 'available' as const, currentSession: undefined };
         }
         return r;
@@ -125,6 +128,28 @@ export function roomReducer(state: RoomState, action: RoomAction): RoomState {
       return {
         ...state,
         rooms: state.rooms.map(room => ({ ...room, status: 'available' }))
+      };
+    }
+
+    case 'UPDATE_ROOM_STATUS': {
+      const payload = action.payload as { roomId: string; status: Room['status']; currentSessionId?: string };
+      if (!payload || !payload.roomId || !payload.status) {
+        return state;
+      }
+
+      const updatedRooms = state.rooms.map(room => 
+        room.id === payload.roomId 
+          ? { 
+              ...room, 
+              status: payload.status,
+              currentSession: payload.currentSessionId || undefined
+            }
+          : room
+      );
+
+      return {
+        ...state,
+        rooms: updatedRooms
       };
     }
 
