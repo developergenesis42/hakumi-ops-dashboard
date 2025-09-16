@@ -1,0 +1,37 @@
+# Cursor ignore file
+# This allows access to environment files while blocking other sensitive files
+
+# Block sensitive files
+*.key
+*.pem
+*.p12
+*.pfx
+*.crt
+*.cer
+*.der
+*.jks
+*.keystore
+
+# Block large directories
+node_modules/
+dist/
+coverage/
+test-results/
+playwright-report/
+
+# Block OS files
+.DS_Store
+Thumbs.db
+
+# Block editor files
+.vscode/settings.json
+.idea/
+
+# Allow environment files (overrides .gitignore)
+!.env*
+!*.env*
+
+# Block other sensitive files
+*.log
+*.tmp
+*.temp

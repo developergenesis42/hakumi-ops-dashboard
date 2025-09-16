@@ -1,0 +1,54 @@
+{
+  "name": "SPA Operations Dashboard",
+  "short_name": "SPA Ops",
+  "description": "Manage therapists, sessions, and daily operations for spa business",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en",
+  "categories": ["business", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/vite.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/vite.svg",
+      "sizes": "1280x720",
+      "type": "image/svg+xml",
+      "form_factor": "wide"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Daily Operations",
+      "short_name": "Dashboard",
+      "description": "View daily operations dashboard",
+      "url": "/?phase=daily-operations",
+      "icons": [{ "src": "/vite.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Roster Setup",
+      "short_name": "Roster",
+      "description": "Manage therapist roster",
+      "url": "/?phase=roster-setup",
+      "icons": [{ "src": "/vite.svg", "sizes": "96x96" }]
+    },
+    {
+      "name": "Closing Out",
+      "short_name": "Closing",
+      "description": "Process end-of-day closing",
+      "url": "/?phase=closing-out",
+      "icons": [{ "src": "/vite.svg", "sizes": "96x96" }]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false
+}

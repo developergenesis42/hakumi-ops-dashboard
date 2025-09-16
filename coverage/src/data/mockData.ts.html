@@ -1,0 +1,448 @@
+
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>Code coverage report for src/data/mockData.ts</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="../../prettify.css" />
+    <link rel="stylesheet" href="../../base.css" />
+    <link rel="shortcut icon" type="image/x-icon" href="../../favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style type='text/css'>
+        .coverage-summary .sorter {
+            background-image: url(../../sort-arrow-sprite.png);
+        }
+    </style>
+</head>
+    
+<body>
+<div class='wrapper'>
+    <div class='pad1'>
+        <h1><a href="../../index.html">All files</a> / <a href="index.html">src/data</a> mockData.ts</h1>
+        <div class='clearfix'>
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Statements</span>
+                <span class='fraction'>5/5</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Branches</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Functions</span>
+                <span class='fraction'>0/0</span>
+            </div>
+        
+            
+            <div class='fl pad1y space-right2'>
+                <span class="strong">100% </span>
+                <span class="quiet">Lines</span>
+                <span class='fraction'>5/5</span>
+            </div>
+        
+            
+        </div>
+        <p class="quiet">
+            Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
+        </p>
+        <template id="filterTemplate">
+            <div class="quiet">
+                Filter:
+                <input type="search" id="fileSearch">
+            </div>
+        </template>
+    </div>
+    <div class='status-line high'></div>
+    <pre><table class="coverage">
+<tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
+<a name='L2'></a><a href='#L2'>2</a>
+<a name='L3'></a><a href='#L3'>3</a>
+<a name='L4'></a><a href='#L4'>4</a>
+<a name='L5'></a><a href='#L5'>5</a>
+<a name='L6'></a><a href='#L6'>6</a>
+<a name='L7'></a><a href='#L7'>7</a>
+<a name='L8'></a><a href='#L8'>8</a>
+<a name='L9'></a><a href='#L9'>9</a>
+<a name='L10'></a><a href='#L10'>10</a>
+<a name='L11'></a><a href='#L11'>11</a>
+<a name='L12'></a><a href='#L12'>12</a>
+<a name='L13'></a><a href='#L13'>13</a>
+<a name='L14'></a><a href='#L14'>14</a>
+<a name='L15'></a><a href='#L15'>15</a>
+<a name='L16'></a><a href='#L16'>16</a>
+<a name='L17'></a><a href='#L17'>17</a>
+<a name='L18'></a><a href='#L18'>18</a>
+<a name='L19'></a><a href='#L19'>19</a>
+<a name='L20'></a><a href='#L20'>20</a>
+<a name='L21'></a><a href='#L21'>21</a>
+<a name='L22'></a><a href='#L22'>22</a>
+<a name='L23'></a><a href='#L23'>23</a>
+<a name='L24'></a><a href='#L24'>24</a>
+<a name='L25'></a><a href='#L25'>25</a>
+<a name='L26'></a><a href='#L26'>26</a>
+<a name='L27'></a><a href='#L27'>27</a>
+<a name='L28'></a><a href='#L28'>28</a>
+<a name='L29'></a><a href='#L29'>29</a>
+<a name='L30'></a><a href='#L30'>30</a>
+<a name='L31'></a><a href='#L31'>31</a>
+<a name='L32'></a><a href='#L32'>32</a>
+<a name='L33'></a><a href='#L33'>33</a>
+<a name='L34'></a><a href='#L34'>34</a>
+<a name='L35'></a><a href='#L35'>35</a>
+<a name='L36'></a><a href='#L36'>36</a>
+<a name='L37'></a><a href='#L37'>37</a>
+<a name='L38'></a><a href='#L38'>38</a>
+<a name='L39'></a><a href='#L39'>39</a>
+<a name='L40'></a><a href='#L40'>40</a>
+<a name='L41'></a><a href='#L41'>41</a>
+<a name='L42'></a><a href='#L42'>42</a>
+<a name='L43'></a><a href='#L43'>43</a>
+<a name='L44'></a><a href='#L44'>44</a>
+<a name='L45'></a><a href='#L45'>45</a>
+<a name='L46'></a><a href='#L46'>46</a>
+<a name='L47'></a><a href='#L47'>47</a>
+<a name='L48'></a><a href='#L48'>48</a>
+<a name='L49'></a><a href='#L49'>49</a>
+<a name='L50'></a><a href='#L50'>50</a>
+<a name='L51'></a><a href='#L51'>51</a>
+<a name='L52'></a><a href='#L52'>52</a>
+<a name='L53'></a><a href='#L53'>53</a>
+<a name='L54'></a><a href='#L54'>54</a>
+<a name='L55'></a><a href='#L55'>55</a>
+<a name='L56'></a><a href='#L56'>56</a>
+<a name='L57'></a><a href='#L57'>57</a>
+<a name='L58'></a><a href='#L58'>58</a>
+<a name='L59'></a><a href='#L59'>59</a>
+<a name='L60'></a><a href='#L60'>60</a>
+<a name='L61'></a><a href='#L61'>61</a>
+<a name='L62'></a><a href='#L62'>62</a>
+<a name='L63'></a><a href='#L63'>63</a>
+<a name='L64'></a><a href='#L64'>64</a>
+<a name='L65'></a><a href='#L65'>65</a>
+<a name='L66'></a><a href='#L66'>66</a>
+<a name='L67'></a><a href='#L67'>67</a>
+<a name='L68'></a><a href='#L68'>68</a>
+<a name='L69'></a><a href='#L69'>69</a>
+<a name='L70'></a><a href='#L70'>70</a>
+<a name='L71'></a><a href='#L71'>71</a>
+<a name='L72'></a><a href='#L72'>72</a>
+<a name='L73'></a><a href='#L73'>73</a>
+<a name='L74'></a><a href='#L74'>74</a>
+<a name='L75'></a><a href='#L75'>75</a>
+<a name='L76'></a><a href='#L76'>76</a>
+<a name='L77'></a><a href='#L77'>77</a>
+<a name='L78'></a><a href='#L78'>78</a>
+<a name='L79'></a><a href='#L79'>79</a>
+<a name='L80'></a><a href='#L80'>80</a>
+<a name='L81'></a><a href='#L81'>81</a>
+<a name='L82'></a><a href='#L82'>82</a>
+<a name='L83'></a><a href='#L83'>83</a>
+<a name='L84'></a><a href='#L84'>84</a>
+<a name='L85'></a><a href='#L85'>85</a>
+<a name='L86'></a><a href='#L86'>86</a>
+<a name='L87'></a><a href='#L87'>87</a>
+<a name='L88'></a><a href='#L88'>88</a>
+<a name='L89'></a><a href='#L89'>89</a>
+<a name='L90'></a><a href='#L90'>90</a>
+<a name='L91'></a><a href='#L91'>91</a>
+<a name='L92'></a><a href='#L92'>92</a>
+<a name='L93'></a><a href='#L93'>93</a>
+<a name='L94'></a><a href='#L94'>94</a>
+<a name='L95'></a><a href='#L95'>95</a>
+<a name='L96'></a><a href='#L96'>96</a>
+<a name='L97'></a><a href='#L97'>97</a>
+<a name='L98'></a><a href='#L98'>98</a>
+<a name='L99'></a><a href='#L99'>99</a>
+<a name='L100'></a><a href='#L100'>100</a>
+<a name='L101'></a><a href='#L101'>101</a>
+<a name='L102'></a><a href='#L102'>102</a>
+<a name='L103'></a><a href='#L103'>103</a>
+<a name='L104'></a><a href='#L104'>104</a>
+<a name='L105'></a><a href='#L105'>105</a>
+<a name='L106'></a><a href='#L106'>106</a>
+<a name='L107'></a><a href='#L107'>107</a>
+<a name='L108'></a><a href='#L108'>108</a>
+<a name='L109'></a><a href='#L109'>109</a>
+<a name='L110'></a><a href='#L110'>110</a>
+<a name='L111'></a><a href='#L111'>111</a>
+<a name='L112'></a><a href='#L112'>112</a>
+<a name='L113'></a><a href='#L113'>113</a>
+<a name='L114'></a><a href='#L114'>114</a>
+<a name='L115'></a><a href='#L115'>115</a>
+<a name='L116'></a><a href='#L116'>116</a>
+<a name='L117'></a><a href='#L117'>117</a>
+<a name='L118'></a><a href='#L118'>118</a>
+<a name='L119'></a><a href='#L119'>119</a>
+<a name='L120'></a><a href='#L120'>120</a>
+<a name='L121'></a><a href='#L121'>121</a>
+<a name='L122'></a><a href='#L122'>122</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">import type { Therapist, Room, Service, AppState, DailyStats } from '../types';
+&nbsp;
+// Mock therapists data (47 therapists from system)
+export const mockTherapists: Therapist[] = [
+  { id: '1', name: 'Ally', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '2', name: 'Anna', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '3', name: 'Audy', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '4', name: 'Ava', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '5', name: 'BB', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '6', name: 'Beer-male', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '7', name: 'Bella', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '8', name: 'Bowie', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '9', name: 'Candy', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '10', name: 'Cherry', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '11', name: 'Cookie', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '12', name: 'Diamond', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '13', name: 'Emmy', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '14', name: 'Essay', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '15', name: 'Gina', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '16', name: 'Hana', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '17', name: 'IV', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '18', name: 'Irin', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '19', name: 'Jenny', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '20', name: 'Kana', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '21', name: 'Kira', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '22', name: 'Kitty', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '23', name: 'Lita', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '24', name: 'Lucky', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '25', name: 'Luna', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '26', name: 'Mabel', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '27', name: 'Mako', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '28', name: 'Maria', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '29', name: 'Micky', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '30', name: 'Miku', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '31', name: 'Mimi', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '32', name: 'Mina', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '33', name: 'Nabee', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '34', name: 'Nana', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '35', name: 'Nicha', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '36', name: 'Oily', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '37', name: 'Palmy', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '38', name: 'Rosy', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '39', name: 'Sara', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '40', name: 'Shopee', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '41', name: 'Sophia', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '42', name: 'Sunny', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '43', name: 'Susie', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '44', name: 'Tata', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '45', name: 'Violet', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '46', name: 'Yuki', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] },
+  { id: '47', name: 'Yuri', status: 'inactive', totalEarnings: 0, totalSessions: 0, expenses: [] }
+];
+&nbsp;
+// Mock rooms data (9 rooms)
+export const mockRooms: Room[] = [
+  // Standard Shower Rooms
+  { id: '1', name: 'Room 1', type: 'Shower', status: 'available' },
+  { id: '2', name: 'Room 2', type: 'Shower', status: 'available' },
+  { id: '3', name: 'Room 3', type: 'Shower', status: 'available' },
+  
+  // VIP Jacuzzi Rooms
+  { id: '4', name: 'Room 4', type: 'VIP Jacuzzi', status: 'available' },
+  { id: '5', name: 'Room 5', type: 'VIP Jacuzzi', status: 'available' },
+  { id: '6', name: 'Room 6', type: 'VIP Jacuzzi', status: 'available' },
+  { id: '9', name: 'Room 9', type: 'VIP Jacuzzi', status: 'available' },
+  
+  // Large Shower Rooms
+  { id: '7', name: 'Room 7', type: 'Double Bed Shower (large)', status: 'available' },
+  { id: '8', name: 'Room 8', type: 'Single Bed Shower (large)', status: 'available' },
+];
+&nbsp;
+// Mock services data
+export const mockServices: Service[] = [
+  // Single Girl Packages - Shower
+  { id: '1', category: 'Single', roomType: 'Shower', duration: 40, price: 3200, ladyPayout: 1300, shopRevenue: 1900, description: '40 min Single Shower' },
+  { id: '2', category: 'Single', roomType: 'Shower', duration: 60, price: 3500, ladyPayout: 1500, shopRevenue: 2000, description: '60 min Single Shower' },
+  { id: '3', category: 'Single', roomType: 'Shower', duration: 90, price: 4000, ladyPayout: 1800, shopRevenue: 2200, description: '90 min Single Shower' },
+  
+  // Single Girl Packages - VIP Jacuzzi
+  { id: '4', category: 'Single', roomType: 'VIP Jacuzzi', duration: 60, price: 4000, ladyPayout: 2000, shopRevenue: 2000, description: '60 min Single VIP Jacuzzi' },
+  { id: '5', category: 'Single', roomType: 'VIP Jacuzzi', duration: 90, price: 5000, ladyPayout: 2300, shopRevenue: 2700, description: '90 min Single VIP Jacuzzi' },
+  
+  // Double Girl Packages - Shower
+  { id: '6', category: 'Double', roomType: 'Shower', duration: 60, price: 6500, ladyPayout: 3400, shopRevenue: 3100, description: '60 min Double Shower (2 Ladies)' },
+  { id: '7', category: 'Double', roomType: 'Shower', duration: 90, price: 7500, ladyPayout: 4000, shopRevenue: 3500, description: '90 min Double Shower (2 Ladies)' },
+  
+  // Double Girl Packages - VIP Jacuzzi
+  { id: '8', category: 'Double', roomType: 'VIP Jacuzzi', duration: 60, price: 7500, ladyPayout: 4000, shopRevenue: 3500, description: '60 min Double VIP Jacuzzi (2 Ladies)' },
+  { id: '9', category: 'Double', roomType: 'VIP Jacuzzi', duration: 90, price: 8500, ladyPayout: 4800, shopRevenue: 3700, description: '90 min Double VIP Jacuzzi (2 Ladies)' },
+  
+  // Couple Packages - Shower
+  { id: '10', category: 'Couple', roomType: 'Shower', duration: 60, price: 7500, ladyPayout: 2500, shopRevenue: 5000, description: '60 min Couple Shower' },
+  { id: '11', category: 'Couple', roomType: 'Shower', duration: 90, price: 8000, ladyPayout: 3000, shopRevenue: 5000, description: '90 min Couple Shower' },
+  
+  // Couple Packages - VIP Jacuzzi
+  { id: '12', category: 'Couple', roomType: 'VIP Jacuzzi', duration: 60, price: 8500, ladyPayout: 3000, shopRevenue: 5500, description: '60 min Couple VIP Jacuzzi' },
+  { id: '13', category: 'Couple', roomType: 'VIP Jacuzzi', duration: 90, price: 9000, ladyPayout: 3500, shopRevenue: 5500, description: '90 min Couple VIP Jacuzzi' },
+];
+&nbsp;
+// Initial daily stats
+export const initialDailyStats: DailyStats = {
+  totalSlips: 0,
+  totalRevenue: 0,
+  totalPayouts: 0,
+  totalDiscounts: 0,
+  shopRevenue: 0,
+  walkOutCount: 0,
+};
+&nbsp;
+// Initial app state
+export const initialAppState: AppState = {
+  currentPhase: 'daily-operations',
+  therapists: mockTherapists,
+  todayRoster: [],
+  rooms: mockRooms,
+  services: mockServices,
+  sessions: [],
+  walkOuts: [],
+  dailyStats: initialDailyStats,
+  history: [],
+  undoStack: [],
+};</pre></td></tr></table></pre>
+
+                <div class='push'></div><!-- for sticky footer -->
+            </div><!-- /wrapper -->
+            <div class='footer quiet pad2 space-top1 center small'>
+                Code coverage generated by
+                <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
+                at 2025-09-12T09:22:49.358Z
+            </div>
+        <script src="../../prettify.js"></script>
+        <script>
+            window.onload = function () {
+                prettyPrint();
+            };
+        </script>
+        <script src="../../sorter.js"></script>
+        <script src="../../block-navigation.js"></script>
+    </body>
+</html>
+    
